@@ -38,7 +38,7 @@ public class Sum {
         return ans;
     }
 
-    public List<List<Integer>> threeSum1(int[] nums) {
+    public static List<List<Integer>> threeSum1(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> res = new ArrayList<>();
         for(int k = 0; k < nums.length - 2; k++){
@@ -59,6 +59,17 @@ public class Sum {
             }
         }
         return res;
+    }
+
+    public static void main(String[] args) {
+//        int[] nums = {-1,0,1,2,-1,-4};
+//        int[] nums = {-1,0,1};
+//        int[] nums = {-1,-1,0,1,1};
+//        int[] nums = {0,0,0};
+//        int[] nums = {0,1,1};
+//        int[] nums = {-2,0,0,2,2};
+        int[] nums = {-1,0,1,2,-1,-4};
+        System.out.println("result  = " + threeSum(nums));
     }
 
 }
