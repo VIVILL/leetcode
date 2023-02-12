@@ -1,3 +1,5 @@
+package ArrayAndLinkedList;
+
 import java.util.Arrays;
 
 public class MajorityElement {
