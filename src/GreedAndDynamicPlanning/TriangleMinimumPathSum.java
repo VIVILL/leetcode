@@ -25,7 +25,7 @@ import java.util.List;
  * 自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
 
  */
-public class MinimumPathSum {
+public class TriangleMinimumPathSum {
     public static void main(String[] args) {
         // [[2],[3,4],[6,5,7],[4,1,8,3]]
         List<Integer> list1 = new ArrayList<>(Arrays.asList(2));
