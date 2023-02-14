@@ -2,6 +2,7 @@ package StackQueueAndRecursion;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * 给你一个字符串数组 tokens ，表示一个根据 逆波兰表示法 表示的算术表达式。
@@ -25,7 +26,9 @@ public class EvaluateReversePolishNotation {
         // 计算过程 2+1 = 3  3 * 3 = 9
         String[] s = {"2","1","+","3","*"} ;
         System.out.println("evalRPN  = " + evalRPN(s));
-    }
+		System.out.println("evalRPN1  = " + evalRPN1(s));
+
+	}
     // 分析
     //https://leetcode.cn/problems/evaluate-reverse-polish-notation/solution/xiang-jie-ni-bo-lan-biao-da-shi-fu-ben-t-sfl6/
 /*
@@ -49,6 +52,42 @@ public class EvaluateReversePolishNotation {
 作者：fuxuemingzhu
 链接：https://leetcode.cn/problems/evaluate-reverse-polish-notation/solution/xiang-jie-ni-bo-lan-biao-da-shi-fu-ben-t-sfl6/
 * */
+
+	// https://leetcode.cn/problems/evaluate-reverse-polish-notation/solution/javachun-shu-zu-he-zhan-liang-chong-shi-xian-jian-/
+	//使用栈 
+	public static int evalRPN1(String[] tokens) {
+		Stack<Integer> numStack = new Stack<>();
+		Integer op1, op2;
+		for (String s : tokens) {
+			switch (s) {
+			case "+":
+				op2 = numStack.pop();
+				op1 = numStack.pop();
+				numStack.push(op1 + op2);
+				break;
+			case "-":
+				op2 = numStack.pop();
+				op1 = numStack.pop();
+				numStack.push(op1 - op2);
+				break;
+			case "*":
+				op2 = numStack.pop();
+				op1 = numStack.pop();
+				numStack.push(op1 * op2);
+				break;
+			case "/":
+				op2 = numStack.pop();
+				op1 = numStack.pop();
+				numStack.push(op1 / op2);
+				break;
+			default:
+				numStack.push(Integer.valueOf(s));
+				break;
+			}
+		}
+		return numStack.pop();
+	}
+ 
 
     //java 版本代码 https://leetcode.cn/problems/evaluate-reverse-polish-notation/solution/by-carlsun-2-a0vh/
     public static int evalRPN(String[] tokens) {
