@@ -1,6 +1,10 @@
 package StackQueueAndRecursion;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
+ * 32. 最长有效括号
  * 给你一个只包含 '(' 和 ')' 的字符串，找出最长有效（格式正确且连续）括号子串的长度。
  * https://leetcode.cn/problems/longest-valid-parentheses/
  */
@@ -10,9 +14,34 @@ public class LongestValidParentheses {
 //        String s = "(()"; // 2
         String s = "(())"; // 4
         System.out.println("longestValidParentheses  = " + longestValidParentheses(s));
+        System.out.println("longestValidParentheses1  = " + longestValidParentheses1(s));
+
+    }
+
+    // https://leetcode.cn/problems/longest-valid-parentheses/solution/java-dong-tai-gui-hua-by-tizzi-n2v1/
+    // 栈版本
+    public static int longestValidParentheses1(String s) {
+        int n = s.length(), ans = 0;
+        char[] arr = s.toCharArray();
+        Deque<Integer> st = new ArrayDeque<>();
+        st.push(-1); //防止所有字符恰好匹配,栈底要为最后一个未被匹配的右括号下标
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == '(') st.push(i); //右括号直接入栈
+            else {
+                //遇到右括号直接弹出
+                st.pop();
+                if (st.isEmpty()) { //若为空代表把栈底最后一个未被匹配的括号弹出
+                    st.push(i);
+                } else {
+                    ans = Math.max(ans, i - st.peek());
+                }
+            }
+        }
+        return ans;
     }
 
     // https://leetcode.cn/problems/longest-valid-parentheses/solution/dong-tai-gui-hua-si-lu-xiang-jie-c-by-zhanganan042/718987
+    // 动态规划版本
     public static int longestValidParentheses(String s) {
         int n = s.length();
         int[] dp = new int[n];//dp是以i处括号结尾的有效括号长度
